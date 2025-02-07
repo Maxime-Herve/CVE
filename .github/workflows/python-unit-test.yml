@@ -3,8 +3,6 @@ name: Run Pytest
 on:
   release:
     types: [published]
-  push:
-    branches:
   pull_request:
     branches:
       - main
