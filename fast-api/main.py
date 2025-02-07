@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 import uvicorn
 
-from cves import router as cves_router
+from filtering import router as filtering_router
 from products import router as products_router
 
 app = FastAPI()
 
-app.include_router(cves_router)
+app.include_router(filtering_router)
 app.include_router(products_router)
 
 if __name__ == "__main__":
