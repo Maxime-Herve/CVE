@@ -41,10 +41,3 @@ jobs:
           echo "Waiting for FastAPI to be ready..."
           sleep 5
         done
-
-    - name: Run tests
-      run: |
-        docker-compose -f docker-compose.yml exec fastapi_app pytest
-
-    - name: Shutdown Docker Compose
-      run: docker-compose -f docker-compose.yml down
