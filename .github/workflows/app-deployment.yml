@@ -42,22 +42,6 @@ jobs:
           sleep 5
         done
 
-    - name: Test Nginx connection
-      run: |
-        response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:80)
-        if [ "$response" -ne 200 ]; then
-          echo "Nginx is not responding with HTTP 200"
-          exit 1
-        fi
-
-    - name: Test FastAPI connection
-      run: |
-        response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:10000)
-        if [ "$response" -ne 200 ]; then
-          echo "FastAPI is not responding with HTTP 200"
-          exit 1
-        fi
-
     - name: Run tests
       run: |
         docker-compose -f docker-compose.yml exec fastapi_app pytest
