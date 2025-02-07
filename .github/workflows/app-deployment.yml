@@ -5,6 +5,7 @@ on:
     types: [published]
   push:
     branches:
+      - main  # Specify the branches you want to trigger the workflow
 
 jobs:
   build:

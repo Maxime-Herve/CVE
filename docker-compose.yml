@@ -5,6 +5,7 @@ services:
     build:
       context: ./fast-api
       dockerfile: Dockerfile
+    image: cloudaccessnetwork/cve:fastapi-${TAG}
     container_name: fastapi_app
     ports:
       - "10000:10000"
@@ -15,6 +16,7 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
+    image: cloudaccessnetwork/cve:nginx-${TAG}
     container_name: nginx_proxy
     ports:
       - "80:80"
