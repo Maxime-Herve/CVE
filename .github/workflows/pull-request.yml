@@ -1,9 +1,10 @@
 name: Run Pytest
 
 on:
+  release:
+    types: [published]
   push:
     branches:
-      - main  # You can specify other branches or events as needed
   pull_request:
     branches:
       - main
