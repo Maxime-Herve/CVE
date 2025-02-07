@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY main.py cves.py products.py .
 
-RUN pip install --no-cache-dir fastapi uvicorn
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 10000
 
