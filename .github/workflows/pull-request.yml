@@ -24,9 +24,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r fast-api/requirements.txt
         pip install pytest
 
     - name: Run tests
       run: |
+        cd fast-api
         pytest
