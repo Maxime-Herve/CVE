@@ -25,7 +25,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r fast-api/requirements.txt
-        pip install pytest
+        pip install pytest httpx
 
     - name: Run tests
       run: |
