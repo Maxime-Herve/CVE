@@ -1,5 +1,5 @@
 name: Docker Compose CI
-
+ 
 on:
   release:
     types: [published]
