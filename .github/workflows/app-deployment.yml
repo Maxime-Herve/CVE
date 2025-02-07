@@ -1,10 +1,12 @@
 name: Docker Compose CI
 
 on:
-  release:
-    types: [published]
   push:
     branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -17,10 +19,14 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Build and push Docker images
+    - name: Install Docker Compose
       run: |
-        docker-compose -f docker-compose.yml build
-        docker-compose -f docker-compose.yml push
+        sudo curl -L "https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        docker-compose --version
+
+    - name: Build Docker images
+      run: docker-compose -f docker-compose.yml build
 
     - name: Run Docker Compose
       run: docker-compose -f docker-compose.yml up -d
