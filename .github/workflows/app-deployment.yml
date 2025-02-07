@@ -1,5 +1,5 @@
 name: Docker Compose CI
- 
+
 on:
   release:
     types: [published]
@@ -45,3 +45,18 @@ jobs:
           echo "Waiting for FastAPI to be ready..."
           sleep 5
         done
+
+    - name: Set tag for release
+      if: github.event_name == 'release'
+      run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+    - name: Set tag for push
+      if: github.event_name == 'push'
+      run: echo "TAG=${GITHUB_SHA}" >> $GITHUB_ENV
+
+    - name: Build and push Docker images
+      run: |
+        docker-compose -f docker-compose.yml build
+        docker-compose -f docker-compose.yml push
+      env:
+        TAG: ${{ env.TAG }}
