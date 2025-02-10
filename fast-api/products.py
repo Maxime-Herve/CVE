@@ -1,11 +1,12 @@
 from fastapi import APIRouter, HTTPException, Query
 import requests
+import os
 from requests.auth import HTTPBasicAuth
 
 router = APIRouter()
 
-username = "maxime.herve@etu.mines-ales.fr"
-password = "T*fFDSUY3@LQ0O"
+username = os.getenv('USERNAME')
+password = os.getenv('PASSWORD')
 
 @router.get("/vendors/{vendor_name}")
 def get_vendor_info(vendor_name: str):
