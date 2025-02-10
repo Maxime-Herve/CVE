@@ -60,3 +60,5 @@ jobs:
         docker-compose -f docker-compose.yml push
       env:
         TAG: ${{ env.TAG }}
+        USERNAME: ${{ env.OPENCVE_USERNAME }}
+        PASSWORD: ${{ env.OPENCVE_PASSWORD }}
