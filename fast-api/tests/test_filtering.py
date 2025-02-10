@@ -10,7 +10,7 @@ from main import app
 client = TestClient(app)
 
 def test_cve_hello():
-    response = client.get("/cve?vendor=microsoft&product=windows")
+    response = client.get("/cve?vendor=microsoft&product=windows&sorting=date")
     assert response.status_code == 200
     json_response = response.json()
-    assert "Filtering" in json_response and json_response["Filtering"] is not None, "Filtering key is missing or has a null value"
+    assert isinstance(json_response, list)
