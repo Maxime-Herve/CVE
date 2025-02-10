@@ -1,4 +1,4 @@
-name: Application overall tests and deployment
+name: Application tests and deployment
 
 on:
   release:
