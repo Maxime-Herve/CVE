@@ -29,6 +29,14 @@ jobs:
         pip install -r fast-api/requirements.txt
         pip install pytest httpx
 
+    - name: Set environment variables
+      env:
+        OPENCVE_USERNAME: ${{ secrets.OPENCVE_USERNAME }}
+        OPENCVE_PASSWORD: ${{ secrets.OPENCVE_PASSWORD }}
+      run: |
+        echo "USERNAME=$OPENCVE_USERNAME" >> $GITHUB_ENV
+        echo "PASSWORD=$OPENCVE_PASSWORD" >> $GITHUB_ENV
+
     - name: Run tests
       run: |
         cd fast-api
