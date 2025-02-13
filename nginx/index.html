@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Site de visualisation de CVE"> 
+        <meta name="keywords" content="CVE, visualisation, checker, analyzer">
+        <meta name="author" content="Maxime Hervé, Nicolas Jaubert">
+        <link rel="icon" href="./favicon.ico"/>
+        <title>CVE Checker</title>
+         
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+
+        <link href="https://fonts.googleapis.com/css2?family=Sarpanch&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="./styles.css">
+        <script src="./scripts.js" defer></script>
+	
+    </head>
+    <body>
+        <h1>CVE Checker</h1>
+        <section>
+            <p>Pour obtenir la liste des CVEs, sélectionner l'éditeur/constructeur puis le nom du produit/logiciel :</p>
+            <div id="searchBar">
+                <input id="vendor" type="text" placeholder="Constructeur/éditeur">
+                <input id="product" type="text" placeholder="Produit/logiciel">
+                <button id="check">Check</button>
+            </div>
+            <div>
+                <table>
+                    <thead id="filterBar">
+                        <tr>
+                            <th id="name">Nom ></th>
+                            <th>Titre</th>
+                            <th id="criticality">Criticité ></th>
+                            <th id="date">Date ></th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultBar"></tbody>
+                </table>
+            </div>
+        </section>
+    </body>
+</html>
