@@ -4,8 +4,8 @@ import os
 from fastapi import APIRouter, HTTPException
 
 BASE_API_URL = "https://app.opencve.io/api/cve"
-USERNAME = os.getenv('API_USERNAME')
-PASSWORD = os.getenv('API_PASSWORD')
+USERNAME = os.getenv('USERNAME')
+PASSWORD = os.getenv('PASSWORD')
 
 router = APIRouter()
 
@@ -42,19 +42,23 @@ def construct_result_list(all_cve):
 
     return  output_list
 
+@router.get("/filtering/vendor/{vendor_name}/")
+def response(vendor_name: str):
+    return {"Vendor": f"{vendor_name}"}
 
-@router.get("/filtering")
-async def filtering(vendor: str, product: str, sorting: str):
+
+@router.get("/filtering/vendor/{vendor_name}/product/{product_name}/sorting/{sorting_type}/")
+def filtering(vendor_name: str, product_name: str, sorting_type: str):
 
     
-    response = requests.get(BASE_API_URL + "?vendor" + vendor + "&product=" + product , auth=HTTPBasicAuth(USERNAME, PASSWORD))
+    response = requests.get(BASE_API_URL + "?vendor" + vendor_name + "&product=" + product_name , auth=HTTPBasicAuth(USERNAME, PASSWORD))
 
     if response.status_code != 200:
         raise HTTPException(status_code=response.status_code, detail=response.json())
     
     output_list = construct_result_list((response.json())["results"])
 
-    match sorting:
+    match sorting_type:
         
         case "criticality":
             return sorted_wrapper(output_list["list"], "criticality", True, True)
@@ -63,5 +67,5 @@ async def filtering(vendor: str, product: str, sorting: str):
         case "name" :
             return sorted_wrapper(output_list["list"], "name", False, False)
         case _:
-            return sorted_wrapper(output_list["list"], "criticality", True, True) #On purpose, just in case
+            return sorted_wrapper(output_list["list"], "criticality", True, True)
 
