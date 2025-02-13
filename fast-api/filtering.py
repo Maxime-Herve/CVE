@@ -42,10 +42,6 @@ def construct_result_list(all_cve):
 
     return  output_list
 
-@router.get("/filtering/vendor/{vendor_name}/")
-def response(vendor_name: str):
-    return {"Vendor": f"{vendor_name}"}
-
 
 @router.get("/filtering/vendor/{vendor_name}/product/{product_name}/sorting/{sorting_type}/")
 def filtering(vendor_name: str, product_name: str, sorting_type: str):
