@@ -50,7 +50,7 @@ def test_sort_by_criticality():
     assert is_sorted_by_criteria(json_response, "criticality")
 
 def test_sort_by_date():
-    response = client.get("/filtering/vendor/microsoft/product/windows/sorting/date")
+    response = client.get("/filtering/vendor/fortinet/product/fortianalyzer/sorting/date")
     assert response.status_code == 200
     json_response = response.json()
     assert isinstance(json_response, list)
