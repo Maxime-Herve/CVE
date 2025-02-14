@@ -2,7 +2,6 @@ import requests
 from requests.auth import HTTPBasicAuth
 import os
 from fastapi import APIRouter, HTTPException
-from products import get_product_cve
 
 BASE_API_URL = "https://app.opencve.io/api/cve"
 USERNAME = os.getenv('USERNAME')
