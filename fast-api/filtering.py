@@ -46,9 +46,12 @@ def construct_result_list(all_cve):
 @router.get("/filtering/vendor/{vendor_name}/product/{product_name}/sorting/{sorting_type}/")
 def filtering(vendor_name: str, product_name: str, sorting_type: str):
 
-    response = get_product_cve(vendor_name, product_name, 1)
+    response = requests.get(BASE_API_URL + "?vendor=" + vendor_name + "&product=" + product_name , auth=HTTPBasicAuth(USERNAME, PASSWORD))
+
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail=response.json())
     
-    output_list = construct_result_list((response)["results"])
+    output_list = construct_result_list((response.json())["results"])
 
     match sorting_type:
         
