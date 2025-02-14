@@ -2,6 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import os
 from fastapi import APIRouter, HTTPException
+from products import get_product_cve
 
 BASE_API_URL = "https://app.opencve.io/api/cve"
 USERNAME = os.getenv('USERNAME')
@@ -46,12 +47,9 @@ def construct_result_list(all_cve):
 @router.get("/filtering/vendor/{vendor_name}/product/{product_name}/sorting/{sorting_type}/")
 def filtering(vendor_name: str, product_name: str, sorting_type: str):
 
-    response = requests.get("http://localhost:10000" + "/vendors/" + vendor_name + "/products/" + product_name + "/cve")
-
-    if response.status_code != 200:
-        raise HTTPException(status_code=response.status_code, detail=response.json())
+    response = get_product_cve(vendor_name, product_name, 1)
     
-    output_list = construct_result_list((response.json())["results"])
+    output_list = construct_result_list((response)["results"])
 
     match sorting_type:
         
